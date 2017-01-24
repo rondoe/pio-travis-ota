@@ -21,14 +21,8 @@ void setup() {
         //exit after config instead of connecting
         wifiManager.setBreakAfterConfig(true);
 
-        //reset settings - for testing
-        //wifiManager.resetSettings();
-
 
         //tries to connect to last known settings
-        //if it does not connect it starts an access point with the specified name
-        //here  "AutoConnectAP" with password "password"
-        //and goes into a blocking loop awaiting configuration
         if (!wifiManager.autoConnect("AutoConnectAP", "password")) {
                 Serial.println("failed to connect, we should reset as see if it connects");
                 delay(3000);
@@ -44,8 +38,7 @@ void setup() {
         Serial.println(WiFi.localIP());
 
 
-        t_httpUpdate_return ret = ESPhttpUpdate.update("http://172.24.6.193:3000/update/esp");
-        //t_httpUpdate_return  ret = ESPhttpUpdate.update("https://server/file.bin");
+        t_httpUpdate_return ret = ESPhttpUpdate.update("http://192.168.1.114:3000/update/esp?secret=nlcb0o9e69vy1xjwvorppafy5dcy999iga0bvppnn8vi0mvq535siif8ef7gkn0h");
 
         switch(ret) {
         case HTTP_UPDATE_FAILED:
@@ -69,7 +62,7 @@ void setup() {
 // the loop function runs over and over again forever
 void loop() {
         digitalWrite(2, HIGH); // turn the LED on (HIGH is the voltage level)
-        delay(500);        // wait for a second
+        delay(100);        // wait for a second
         digitalWrite(2, LOW); // turn the LED off by making the voltage LOW
-        delay(500);        // wait for a second
+        delay(100);        // wait for a second
 }
